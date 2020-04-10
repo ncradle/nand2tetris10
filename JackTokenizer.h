@@ -11,7 +11,7 @@ class JackTokenizer {
   std::ifstream &ifs;
 
  public:
-  JackTokenizer(std::ifstream &iifs);
+  JackTokenizer(std::ifstream &jackfile);
   bool hasMoreTokens();
   void advance();
   TokenType tokenType();
