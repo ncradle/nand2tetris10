@@ -21,7 +21,7 @@ enum KeyWordType {
   RETURN,
   TRUE,
   FALSE,
-  NULL,
+  NUll,
   THIS
 };
 
