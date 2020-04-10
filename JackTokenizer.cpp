@@ -4,7 +4,6 @@ JackTokenizer::JackTokenizer(std::ifstream &jackfile)
     : ifs{jackfile}, token("") {}
 
 bool JackTokenizer::hasMoreTokens() {
-  token.clear();
   while (char word = ifs.get()) {
     if (word == ' ') continue;
     if (word == '/') {
@@ -32,12 +31,12 @@ bool JackTokenizer::hasMoreTokens() {
         continue;
       }
 
-      // 除算演算子
-      token += word;
+      // 除算演算子パターン
+      initial_token = word;
       return true;
     }
 
-    token += word;
+    initial_token = word;
     return true;
   }
 

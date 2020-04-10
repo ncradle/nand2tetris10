@@ -9,6 +9,7 @@
 
 class JackTokenizer {
   std::ifstream &ifs;
+  char initial_token;
   std::string token;
 
  public:
