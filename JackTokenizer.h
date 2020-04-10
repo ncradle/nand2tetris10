@@ -8,8 +8,10 @@
 #include "TokenType.h"
 
 class JackTokenizer {
+  std::ifstream &ifs;
+
  public:
-  JackTokenizer(std::ifstream &ifs);
+  JackTokenizer(std::ifstream &iifs);
   bool hasMoreTokens();
   void advance();
   TokenType tokenType();
