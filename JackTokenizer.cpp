@@ -11,7 +11,6 @@ JackTokenizer::JackTokenizer(std::ifstream &jackfile)
 
 bool JackTokenizer::hasMoreTokens() {
   if (initial_token != 0) return true;
-  initial_token = 0;
   while (1) {
     char word = ifs.get();
     // eof
@@ -78,7 +77,6 @@ void JackTokenizer::advance() {
   while (isalnum(word) | (word == '_')) {
     token += word;
     word = ifs.get();
-    initial_token = 0;
   }
 
   if (SymbolReserverdWord.contains(word)) {
