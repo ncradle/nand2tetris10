@@ -36,5 +36,10 @@ int main(int argc, char *argv[]) {
     if (jackfile.extension() != ".jack") continue;
 
     cout << "open filename : " << jackfile.filename() << endl;
+    ifstream ifs(jackfile);
+    if (!ifs) {
+      cout << "Can't open " << jackfile.filename() << endl;
+      continue;
+    }
   }
 }
