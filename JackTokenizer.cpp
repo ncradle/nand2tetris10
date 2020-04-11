@@ -1,7 +1,7 @@
 #include "JackTokenizer.h"
 
 JackTokenizer::JackTokenizer(std::ifstream &jackfile)
-    : ifs{jackfile}, token("") {}
+    : ifs{jackfile}, initial_token(0), token("") {}
 
 bool JackTokenizer::hasMoreTokens() {
   while (char word = ifs.get()) {
