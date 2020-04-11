@@ -41,9 +41,39 @@ int main(int argc, char *argv[]) {
       cout << "Can't open " << jackfile.filename() << endl;
       continue;
     }
-    JackTokenizer jt(ifs);
 
+    fs::path Txml_file = jackfile;
+    Txml_file.replace_filename(jackfile.stem().string() + "TT");
+    ofstream ofs(Txml_file.replace_extension("xml"));
+
+    JackTokenizer jt(ifs);
+    ofs << "<tokens>" << endl;
     while (jt.hasMoreTokens()) {
+      jt.advance();
+      TokenType token_type = jt.tokenType();
+      switch (token_type) {
+        case KEYWORD:
+          ofs << "  <keyword> " << jt.keyWord() << " </keyword>" << endl;
+          break;
+        case SYMBOL:
+          ofs << "  <symbol> " << jt.symbol() << " </symbol>" << endl;
+          break;
+        case IDENTIFIER:
+          ofs << "  <identifier> " << jt.identifier() << " </identifier>"
+              << endl;
+          break;
+        case INT_CONST:
+          ofs << "  <integerConstant> " << jt.intVal() << " </integerConstant>"
+              << endl;
+          break;
+        case STRING_CONST:
+          ofs << "  <stringConstant> " << jt.stringVal() << " </stringConstant>"
+              << endl;
+          break;
+        default:
+          break;
+      }
     }
+    ofs << "</tokens>" << endl;
   }
 }
