@@ -20,6 +20,7 @@ bool JackTokenizer::hasMoreTokens() {
     if (word == '\n') continue;
     if (word == '\t') continue;
     if (word == '/') {
+      initial_token = word;
       word = ifs.get();
 
       // /**/パターン
@@ -45,7 +46,6 @@ bool JackTokenizer::hasMoreTokens() {
       }
 
       // 除算演算子パターン
-      initial_token = word;
       return true;
     }
 
