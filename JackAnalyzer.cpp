@@ -41,5 +41,9 @@ int main(int argc, char *argv[]) {
       cout << "Can't open " << jackfile.filename() << endl;
       continue;
     }
+    JackTokenizer jt(ifs);
+
+    while (jt.hasMoreTokens()) {
+    }
   }
 }
