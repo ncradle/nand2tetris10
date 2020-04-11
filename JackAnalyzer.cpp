@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
   }
 
   for (const auto &jackfile : jackfiles) {
-    if (jackfile.extension() != ".vm") continue;
+    if (jackfile.extension() != ".jack") continue;
 
     cout << "open filename : " << jackfile.filename() << endl;
   }
