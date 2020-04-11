@@ -2,7 +2,9 @@
 
 #include <cctype>
 
+#include "KeywordReservedWord.h"
 #include "SymbolReservedWord.h"
+#include "TokenType.h"
 
 JackTokenizer::JackTokenizer(std::ifstream &jackfile)
     : ifs{jackfile}, initial_token(0), token("") {}
@@ -84,4 +86,13 @@ void JackTokenizer::advance() {
     return;
   }
   initial_token = 0;
+}
+
+TokenType JackTokenizer::tokenType() {
+  const char token_initial = token[0];
+  if (SymbolReserverdWord.contains(token_initial)) return SYMBOL;
+  if (token_initial == '\"') return STRING_CONST;
+  if (KeywordReservedWord.contains(token)) return KEYWORD;
+  if (std::all_of(token.cbegin(), token.cend(), isdigit)) return INT_CONST;
+  return IDENTIFIER;
 }
