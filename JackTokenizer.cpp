@@ -94,3 +94,25 @@ TokenType JackTokenizer::tokenType() {
   if (std::all_of(token.cbegin(), token.cend(), isdigit)) return INT_CONST;
   return IDENTIFIER;
 }
+
+std::string JackTokenizer::keyWord() { return token; }
+
+std::string JackTokenizer::symbol() {
+  if (token[0] == '<') return "&lt;";
+  if (token[0] == '>') return "&gt;";
+  if (token[0] == '&') return "&amp;";
+  return token;
+}
+
+std::string JackTokenizer::identifier() { return token; }
+
+int JackTokenizer::intVal() { return std::stoi(token); }
+
+std::string JackTokenizer::stringVal() {
+  std::string remove_doublequote;
+  for (auto str : token) {
+    if (str == '\"') continue;
+    remove_doublequote += str;
+  }
+  return remove_doublequote;
+}

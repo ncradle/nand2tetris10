@@ -17,8 +17,8 @@ class JackTokenizer {
   bool hasMoreTokens();
   void advance();
   TokenType tokenType();
-  KeyWordType keyWord();
-  char symbol();
+  std::string keyWord();
+  std::string symbol();
   std::string identifier();
   int intVal();
   std::string stringVal();
