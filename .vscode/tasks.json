@@ -16,6 +16,7 @@
 				"JackAnalyzer",
 				"JackAnalyzer.cpp",
 				"JackTokenizer.cpp"
+				"CompilationEngine.cpp"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
