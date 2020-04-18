@@ -9,13 +9,16 @@
 
 class JackTokenizer {
   std::ifstream &ifs;
-  char initial_token;
-  std::string token;
+  char initial_token, buff_initial_token;
+  std::string token, buff_token;
+  std::ifstream::pos_type pos;
 
  public:
   JackTokenizer(std::ifstream &jackfile);
   bool hasMoreTokens();
   void advance();
+  void savePos();
+  void resetPos();
   TokenType tokenType();
   std::string keyWord();
   std::string symbol();

@@ -1,13 +1,16 @@
 #include "JackTokenizer.h"
 
-#include <cctype>
-
 #include "KeywordReservedWord.h"
 #include "SymbolReservedWord.h"
 #include "TokenType.h"
 
 JackTokenizer::JackTokenizer(std::ifstream &jackfile)
-    : ifs{jackfile}, initial_token(0), token("") {}
+    : ifs{jackfile},
+      initial_token(0),
+      buff_initial_token(0),
+      token(""),
+      buff_token(""),
+      pos{0} {}
 
 bool JackTokenizer::hasMoreTokens() {
   if (initial_token != 0) return true;
@@ -115,4 +118,19 @@ std::string JackTokenizer::stringVal() {
     remove_doublequote += str;
   }
   return remove_doublequote;
+}
+
+void JackTokenizer::savePos() {
+  if (pos != 0) return;
+  pos = ifs.tellg();
+  buff_initial_token = initial_token;
+  buff_token = token;
+}
+
+void JackTokenizer::resetPos() {
+  if (pos == 0) return;
+  ifs.seekg(pos);
+  pos = 0;
+  token = buff_token;
+  initial_token = buff_initial_token;
 }
