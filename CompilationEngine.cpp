@@ -122,7 +122,6 @@ void CompilationEngine::compileClassVarDec() {
   }
   symbol();
   deindentLabel("classVarDec");
-  compileVarDec();
 }
 
 void CompilationEngine::compileSubroutine() {
