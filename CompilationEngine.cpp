@@ -125,9 +125,6 @@ void CompilationEngine::compileClassVarDec() {
 }
 
 void CompilationEngine::compileSubroutine() {
-  if (jt.tokenType() != KEYWORD) return;
-  std::string buff = jt.keyWord();
-  if (buff != "counstructor" && buff != "function" && buff != "method") return;
   indentLabel("subroutineDec");
   keyword();
   if (jt.tokenType() == KEYWORD && jt.keyWord() == "void") {
@@ -141,7 +138,9 @@ void CompilationEngine::compileSubroutine() {
   symbol();
   indentLabel("subroutineBody");
   symbol();
-  compileVarDec();
+  while (jt.tokenType() == KEYWORD && jt.keyWord() == "var") {
+    compileVarDec();
+  }
   compileStatements();
   symbol();
   deindentLabel("subroutineBody");
