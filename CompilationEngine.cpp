@@ -250,7 +250,7 @@ void CompilationEngine::compileDo() {
 
 void CompilationEngine::compileReturn() {
   keyword();
-  while (jt.tokenType() != SYMBOL || jt.symbol() != ";") {
+  if (!(jt.tokenType() == SYMBOL && jt.symbol() == ";")) {
     compileExpression();
   }
   symbol();
