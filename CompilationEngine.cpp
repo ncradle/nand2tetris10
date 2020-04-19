@@ -307,11 +307,7 @@ void CompilationEngine::compileTerm() {
           symbol();
           break;
         }
-        if (symbl == "(") {
-          compileSubroutineCall();
-          break;
-        }
-        if (symbl == ".") {
+        if (symbl == "(" || symbl == ".") {
           compileSubroutineCall();
           break;
         }
