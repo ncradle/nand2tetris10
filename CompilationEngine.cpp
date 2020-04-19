@@ -284,14 +284,17 @@ void CompilationEngine::compileTerm() {
   indentLabel("term");
   TokenType tt = jt.tokenType();
   switch (tt) {
+    // integerConstant
     case INT_CONST:
       integerConstant();
       break;
 
+    // stringConstant
     case STRING_CONST:
       stringConstant();
       break;
 
+    // keywordConstant
     case KEYWORD:
       keyword();
       break;
@@ -301,26 +304,32 @@ void CompilationEngine::compileTerm() {
       if (jt.tokenType() == SYMBOL) {
         std::string symbl = jt.symbol();
         jt.resetPos();
+        // varName [ expression ]
         if (symbl == "[") {
           symbol();
           compileExpression();
           symbol();
           break;
         }
+        // subroutineCall
         if (symbl == "(" || symbl == ".") {
           compileSubroutineCall();
           break;
         }
       }
+      // varName
+      identifier();
       break;
 
     case SYMBOL:
+      // ( expression )
       if (jt.symbol() == "(") {
         symbol();
         compileExpression();
         symbol();
         break;
       }
+      // uaryOp term
       indentLabel("unaryOp");
       symbol();
       deindentLabel("unaryOp");
