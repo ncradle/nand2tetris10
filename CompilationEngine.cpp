@@ -212,14 +212,14 @@ void CompilationEngine::compileLet() {
 
 void CompilationEngine::compileIf() {
   indentLabel("ifStatement");
-  symbol();
+  keyword();
   symbol();
   compileExpression();
   symbol();
   symbol();
   compileStatements();
   symbol();
-  while (jt.tokenType() == KEYWORD && jt.keyWord() == "else") {
+  if (jt.tokenType() == KEYWORD && jt.keyWord() == "else") {
     keyword();
     symbol();
     compileStatements();
