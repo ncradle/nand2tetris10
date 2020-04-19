@@ -261,7 +261,7 @@ void CompilationEngine::compileExpression() {
   compileTerm();
   while (isOp()) {
     indentLabel("op");
-    keyword();
+    symbol();
     deindentLabel("op");
     compileTerm();
   }
