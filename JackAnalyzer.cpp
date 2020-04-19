@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "CompilationEngine.h"
 #include "JackTokenizer.h"
 #include "KeyWordType.h"
 #include "TokenType.h"
@@ -47,6 +48,7 @@ int main(int argc, char *argv[]) {
     ofstream ofs(Txml_file.replace_extension("xml"));
 
     JackTokenizer jt(ifs);
+    /*
     ofs << "<tokens>" << endl;
     while (jt.hasMoreTokens()) {
       jt.advance();
@@ -75,5 +77,11 @@ int main(int argc, char *argv[]) {
       }
     }
     ofs << "</tokens>" << endl;
+*/
+    Txml_file.replace_filename(jackfile.stem().string() + "TTT");
+    ofstream ofsp(Txml_file.replace_extension("xml"));
+    CompilationEngine ce{jt, ofsp};
+    ce.compileClass();
   }
+  return 0;
 }
