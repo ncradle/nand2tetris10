@@ -199,7 +199,7 @@ void CompilationEngine::compileLet() {
   indentLabel("letStatement");
   keyword();
   identifier();
-  while (jt.symbol() == "[") {
+  if (jt.symbol() == "[") {
     symbol();
     compileExpression();
     symbol();
