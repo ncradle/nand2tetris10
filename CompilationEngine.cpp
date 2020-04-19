@@ -99,15 +99,6 @@ void CompilationEngine::deindentLabel(std::string label) {
 void CompilationEngine::compileClass() {
   if (jt.tokenType() != KEYWORD) return;
   if (jt.keyWord() != "class") return;
-
-  identifier();
-  jt.identifier();
-  jt.savePos();
-  identifier();
-  identifier();
-  identifier();
-  return;
-
   indentLabel("class");
   keyword();
   identifier();
