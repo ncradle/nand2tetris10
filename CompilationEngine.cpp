@@ -17,18 +17,6 @@ void CompilationEngine::lookAhead() {
   advance();
 }
 
-void CompilationEngine::indent() {
-  tab_num++;
-  tab.clear();
-  for (int i = 0; i < tab_num; i++) tab += "  ";
-}
-
-void CompilationEngine::deIndent() {
-  tab_num--;
-  tab.clear();
-  for (int i = 0; i < tab_num; i++) tab += "  ";
-}
-
 void CompilationEngine::keyword() {
   ofs << tab << "<keyword> " << jt.keyWord() << " </keyword>\n";
   advance();
@@ -88,11 +76,15 @@ bool CompilationEngine::isOp() {
 
 void CompilationEngine::indentLabel(std::string label) {
   ofs << tab << "<" << label << ">\n";
-  indent();
+  tab_num++;
+  tab.clear();
+  for (int i = 0; i < tab_num; i++) tab += "  ";
 }
 
 void CompilationEngine::deindentLabel(std::string label) {
-  deIndent();
+  tab_num--;
+  tab.clear();
+  for (int i = 0; i < tab_num; i++) tab += "  ";
   ofs << tab << "</" << label << ">\n";
 }
 

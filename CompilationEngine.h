@@ -13,8 +13,6 @@ class CompilationEngine {
 
   void advance();
   void lookAhead();
-  void indent();
-  void deIndent();
   void keyword();
   void symbol();
   void integerConstant();
