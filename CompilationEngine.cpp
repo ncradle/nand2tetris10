@@ -162,8 +162,6 @@ void CompilationEngine::compileParameterList() {
 }
 
 void CompilationEngine::compileVarDec() {
-  if (jt.tokenType() != KEYWORD) return;
-  if (jt.keyWord() != "var") return;
   indentLabel("varDec");
   keyword();
   type();
@@ -174,7 +172,6 @@ void CompilationEngine::compileVarDec() {
   }
   symbol();
   deindentLabel("varDec");
-  compileVarDec();
 }
 
 void CompilationEngine::compileStatements() {
