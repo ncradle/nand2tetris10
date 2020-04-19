@@ -175,24 +175,24 @@ void CompilationEngine::compileVarDec() {
 }
 
 void CompilationEngine::compileStatements() {
-  if (jt.tokenType() != KEYWORD) return;
   indentLabel("statements");
-  std::string statement = jt.keyWord();
-  if (statement == "let") {
-    compileLet();
-  } else if (statement == "if") {
-    compileIf();
-  } else if (statement == "while") {
-    compileWhile();
-  } else if (statement == "do") {
-    compileDo();
-  } else if (statement == "return") {
-    compileReturn();
-  } else {
-    return;
+  while (1) {
+    std::string statement = jt.keyWord();
+    if (statement == "let") {
+      compileLet();
+    } else if (statement == "if") {
+      compileIf();
+    } else if (statement == "while") {
+      compileWhile();
+    } else if (statement == "do") {
+      compileDo();
+    } else if (statement == "return") {
+      compileReturn();
+    } else {
+      break;
+    }
   }
   deindentLabel("statements");
-  compileStatements();
 }
 
 void CompilationEngine::compileLet() {
