@@ -95,16 +95,23 @@ void CompilationEngine::compileClass() {
   keyword();
   identifier();
   symbol();
-  compileVarDec();
-  compileSubroutine();
+  while (1) {
+    if (jt.tokenType() != KEYWORD) break;
+    if (!(jt.keyWord() == "static" || jt.keyWord() == "field")) break;
+    compileVarDec();
+  }
+  while (1) {
+    if (jt.tokenType() != KEYWORD) break;
+    if (!(jt.keyWord() == "constructor" || jt.keyWord() == "function" ||
+          jt.keyWord() == "method"))
+      break;
+    compileSubroutine();
+  }
   symbol();
   deindentLabel("class");
 }
 
 void CompilationEngine::compileClassVarDec() {
-  if (jt.tokenType() != KEYWORD) return;
-  std::string buff = jt.keyWord();
-  if (buff != "static" && buff != "field") return;
   indentLabel("classVarDec");
   keyword();
   type();
