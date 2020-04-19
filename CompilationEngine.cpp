@@ -270,10 +270,12 @@ void CompilationEngine::compileExpression() {
 
 void CompilationEngine::compileExpressionList() {
   indentLabel("expressionList");
-  compileExpression();
-  while (jt.symbol() == ",") {
-    symbol();
+  if (!(jt.tokenType() == SYMBOL && jt.symbol() == ")")) {
     compileExpression();
+    while (jt.symbol() == ",") {
+      symbol();
+      compileExpression();
+    }
   }
   deindentLabel("expressionList");
 }
